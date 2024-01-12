@@ -29,6 +29,8 @@ fn main() {
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
+
+        // counterのownershipが他のthreadに移らないようにcloneする
         let c = Arc::clone(&counter);
 
         // リクエストが来るたびにスレッドを起動、下で定義されたhandle_connectionを実行する
